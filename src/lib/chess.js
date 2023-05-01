@@ -1,30 +1,3 @@
-/*
- * Copyright (c) 2021, Jeff Hlywa (jhlywa@gmail.com)
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *
- * 1. Redistributions of source code must retain the above copyright notice,
- *    this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
- * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
- * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
- * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
- * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
- * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
- * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
- * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- *----------------------------------------------------------------------------*/
-
 var Chess = function (fen) {
   var BLACK = 'b'
   var WHITE = 'w'
@@ -264,11 +237,7 @@ var Chess = function (fen) {
     return true
   }
 
-  /* TODO: this function is pretty much crap - it validates structure but
-   * completely ignores content (e.g. doesn't verify that each side has a king)
-   * ... we should rewrite this, and ditch the silly error_number field while
-   * we're at it
-   */
+  
   function validate_fen(fen) {
     var errors = {
       0: 'No errors.',
@@ -848,11 +817,7 @@ var Chess = function (fen) {
   }
 
   function in_threefold_repetition() {
-    /* TODO: while this function is fine for casual use, a better
-     * implementation would use a Zobrist key (instead of FEN). the
-     * Zobrist key would be maintained in the make_move/undo_move functions,
-     * avoiding the costly that we do below.
-     */
+   
     var moves = []
     var positions = {}
     var repetition = false
@@ -1143,22 +1108,6 @@ var Chess = function (fen) {
     var overly_disambiguated = false
 
     if (sloppy) {
-      // The sloppy parser allows the user to parse non-standard chess
-      // notations. This parser is opt-in (by specifying the
-      // '{ sloppy: true }' setting) and is only run after the Standard
-      // Algebraic Notation (SAN) parser has failed.
-      //
-      // When running the sloppy parser, we'll run a regex to grab the piece,
-      // the to/from square, and an optional promotion piece. This regex will
-      // parse common non-standard notation like: Pe2-e4, Rc1c4, Qf3xf7, f7f8q,
-      // b1c3
-
-      // NOTE: Some positions and moves may be ambiguous when using the sloppy
-      // parser. For example, in this position: 6k1/8/8/B7/8/8/8/BN4K1 w - - 0 1,
-      // the move b1c3 may be interpreted as Nc3 or B1c3 (a disambiguated
-      // bishop move). In these cases, the sloppy parser will default to the
-      // most most basic interpretation - b1c3 parses to Nc3.
-
       var matches = clean_move.match(
         /([pnbrqkPNBRQK])?([a-h][1-8])x?-?([a-h][1-8])([qrbnQRBN])?/
       )
@@ -1693,16 +1642,7 @@ var Chess = function (fen) {
         }
       }
 
-      /* NB: the regexes below that delete move numbers, recursive
-       * annotations, and numeric annotation glyphs may also match
-       * text in comments. To prevent this, we transform comments
-       * by hex-encoding them in place and decoding them again after
-       * the other tokens have been deleted.
-       *
-       * While the spec states that PGN files should be ASCII encoded,
-       * we use {en,de}codeURIComponent here to support arbitrary UTF8
-       * as a convenience for modern users */
-
+     
       var to_hex = function (string) {
         return Array.from(string)
           .map(function (c) {
