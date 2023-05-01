@@ -1,13 +1,20 @@
-## Running React on Repl.it
+## A simple but fun to play chess game.
 
-[React](https://reactjs.org/) is a popular JavaScript library for building user interfaces.
+## Original creator: https://replit.com/@jjroley  
+* This wasn't made by me (CPScript)
 
-[Vite](https://vitejs.dev/) is a blazing fast frontend build tool that includes features like Hot Module Reloading (HMR), optimized builds, and TypeScript support out of the box.
+## Why is this here?
+* I got this off of replit, and thought it was cool.
+* Im going to use this for referance because im planning on creating my own chess app.
+* Public use, some people dont use replit so here s the code to the program.
+* easy to access
 
-Using the two in conjunction is one of the fastest ways to build a web app.
+## Is it good?
+* YES! this game has multyplayer so your never going to 1v1 a bot
+* This can give your practice.
+* You can 1v1 freinds and online players
+* I suck at chess, but i love to play it!
 
-### Getting Started
-- Hit run
-- Edit [App.jsx](#src/App.jsx) and watch it live update!
 
-By default, Replit runs the `dev` script, but you can configure it by changing the `run` field in the `.replit` file.
+# How to play?
+Go to this link ( https://replit.com/@jjroley/live-chess?v=1 ) and click "RUN"
